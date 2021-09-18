@@ -23,12 +23,13 @@ npm install gulp-imagemin
 npm install gulp-jsmin
 npm install gulp-strip-comments
 npm install gulp-sass
+npm install gulp-w3cjs
 ```
 
 ## Usage
 
 ```bash
-# gulp default function, run a webserver, live-compile sass.
+# gulp default function, run a webserver, live-compile sass, live check w3c rules.
 gulp
 
 # for production, make a build version in a 'dist' folder, all minify and comment free.
