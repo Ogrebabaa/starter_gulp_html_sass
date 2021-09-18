@@ -1,4 +1,4 @@
-@charset "UTF-8";
+
 /* Regles generales */
 *, *:after, *:before {
   box-sizing: border-box;
@@ -7,30 +7,27 @@
 html {
   font-size: 62.5%;
 }
-
 body {
   color: red;
-  font-size: 2rem;
-  /* 14px par défaut */
+  font-size: 2rem;            /* 14px par défaut */
   /*font-family: 'Noto sans', sans-serif;*/
 }
 
-a, a:hover, a:visited {
-  /* ATTENTION LES LIENS SONT BLANC DANS CE MODELE*/
+a, a:hover, a:visited{                /* ATTENTION LES LIENS SONT BLANC DANS CE MODELE*/
   color: #FFF;
   text-decoration: none;
 }
-
-img {
-  max-width: 100%;
+img{
+  max-width:100%;
   height: auto;
-  vertical-align: middle;
+  vertical-align: middle; 
 }
+
 
 /*******************************/
 /* Starter: Prsentation       */
 /*****************************/
-.presentation {
+.presentation{
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -39,13 +36,16 @@ img {
   background-color: #313378;
 }
 
-.presentation h1 {
-  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+.presentation h1{
+  font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   color: #FFF;
   font-size: 8rem;
-  padding-bottom: 10rem;
+  padding-bottom: 10rem; 
 }
 
 /********************/
 /* HEADER:         */
 /******************/
+
+
+
