@@ -9,6 +9,7 @@ const imagemin = require('gulp-imagemin');
 const jsmin = require('gulp-jsmin');
 const strip = require('gulp-strip-comments');
 const sass = require('gulp-sass')(require('sass'));
+const w3cjs = require('gulp-w3cjs');
 
 const distFolder = './dist/';
 const paths = {
@@ -65,6 +66,14 @@ function html() {
       .pipe(browsersync.stream())
   );
 }
+function checkupW3C() {
+  return (
+    gulp
+      .src(paths.html.src, { since: gulp.lastRun(checkupW3C) })
+      .pipe(w3cjs())
+      .pipe(w3cjs.reporter())
+  );
+}
 
 function buildStyles() {
   return gulp.src(paths.sass.src, { since: gulp.lastRun(buildStyles) })
@@ -110,6 +119,10 @@ function watch() {
     paths.sass.src,
     buildStyles,
   );
+  gulp.watch(
+    paths.html.src,
+    checkupW3C,
+  );
 }
 
 function watchFile() {
@@ -147,5 +160,6 @@ exports.devDist = devDist;
 exports.browserSyncDev = browserSyncDev;
 exports.html = html;
 exports.css = css;
+exports.checkupW3C = checkupW3C;
 const build = gulp.series(clear, html, css, js, images);
 exports.build = build;
