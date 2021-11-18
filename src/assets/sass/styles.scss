@@ -8,13 +8,12 @@ html {
   font-size: 62.5%;
 }
 body {
-  color: red;
-  font-size: 2rem;            /* 14px par défaut */
-  /*font-family: 'Noto sans', sans-serif;*/
+  color: #000;
+  font-size: 1.4rem;            
 }
 
 a, a:hover, a:visited{                /* ATTENTION LES LIENS SONT BLANC DANS CE MODELE*/
-  color: #FFF;
+  color: #000;
   text-decoration: none;
 }
 img{
@@ -22,7 +21,6 @@ img{
   height: auto;
   vertical-align: middle; 
 }
-
 
 /*******************************/
 /* Starter: Prsentation       */
