@@ -6,7 +6,7 @@ const del = require('del');
 const autoprefixer = require('gulp-autoprefixer');
 const cleanCSS = require('gulp-clean-css');
 const imagemin = require('gulp-imagemin');
-const jsmin = require('gulp-jsmin');
+const uglify = require('gulp-uglify-es').default;
 const strip = require('gulp-strip-comments');
 const sass = require('gulp-sass')(require('sass'));
 const w3cjs = require('gulp-w3cjs');
@@ -97,7 +97,7 @@ function js() {
   return (
     gulp
       .src(paths.js.src, { since: gulp.lastRun(js) })
-      .pipe(jsmin())
+      .pipe(uglify())
       .pipe(gulp.dest('dist/assets/js'))
       .pipe(browsersync.stream())
   );
