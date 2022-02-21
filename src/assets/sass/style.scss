@@ -1,0 +1,23 @@
+/* 
+  WARNING: 
+  please follow the order as described below 
+  to prevent any use error! 
+*/
+
+/* 1 - requirements */
+@use 'tools/reset';
+
+/* 2 - base model */
+@use 'global/base';
+
+/* 3 - modules */
+@use 'modules/title';
+@use 'modules/header';
+@use 'modules/footer';
+@use 'modules/hidden';
+@use 'modules/button';
+@use 'modules/burger';
+
+/* 4 - sections */
+@use 'sections/landing';
+

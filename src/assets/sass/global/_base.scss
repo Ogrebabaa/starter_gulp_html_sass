@@ -1,0 +1,47 @@
+@use '../variables/colors';
+@use '../variables/fonts';
+
+/* General rules */
+
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%; /* 1rem = 10px */
+  overflow-x: hidden;
+}
+
+body {
+  font-size: 1.4rem; /* 14px by default */
+  font-family: fonts.$font-main;
+  background-color: colors.$white;
+  width: 100%;
+}
+
+section {
+  padding: 5vw;
+  min-height: 90vh;
+}
+
+/* WARNING: links are black by default, don't forget to reuse this syntax to override this default style */
+a:link,
+a:hover,
+a:visited {
+  color: black;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+
+@media screen and (min-width: 992px) {
+  section {
+    padding: 2vw 10vw;
+  }
+}
