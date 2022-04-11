@@ -9,7 +9,7 @@ const imagemin = require('gulp-imagemin');
 const uglify = require('gulp-uglify-es').default;
 const strip = require('gulp-strip-comments');
 const sass = require('gulp-sass')(require('sass'));
-const w3cjs = require('gulp-w3cjs');
+const browsersync = require('browser-sync').create();
 
 const distFolder = './dist/';
 const paths = {
@@ -25,17 +25,16 @@ const paths = {
     src: './src/assets/js/**/*.js',
     dest: './dist/assets/js/',
   },
-  sass: {
-    src: './src/assets/sass/**/*.scss',
-    dest: './dist/assets/sass/',
+  scss: {
+    src: './src/assets/scss/**/*.scss',
+    dest: './src/assets/css/',
   },
 };
 
-// install du plugin
-const browsersync = require('browser-sync').create();
 // variables
 const srcFolder = './src/';
 const srcFolderBuild = './dist/';
+
 // BrowserSync
 function browserSyncDev() {
   browsersync.init({
@@ -66,25 +65,20 @@ function html() {
       .pipe(browsersync.stream())
   );
 }
-function checkupW3C() {
-  return (
-    gulp
-      .src(paths.html.src, { since: gulp.lastRun(checkupW3C) })
-      .pipe(w3cjs())
-      .pipe(w3cjs.reporter())
-  );
-}
 
-function buildStyles() {
-  return gulp.src(paths.sass.src, { since: gulp.lastRun(buildStyles) })
-    .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest('./src/assets/css'));
+function scss() {
+  return gulp
+    .src(paths.scss.src)
+    .pipe(plumber())
+    .pipe(sass.sync().on('error', sass.logError))
+    .pipe(gulp.dest(paths.scss.dest))
+    .pipe(browsersync.stream());
 }
 
 function css() {
   return (
     gulp
-      .src(paths.css.src, { since: gulp.lastRun(css) })
+      .src(paths.css.src)
       .pipe(autoprefixer({
         cascade: false,
       }))
@@ -113,35 +107,15 @@ function images() {
 }
 
 function watch() {
-  gulp.watch([paths.css.src, paths.html.src, paths.js.src, paths.sass.src])
+  gulp.watch(paths.scss.src)
+    .on('change', () => {
+      scss();
+      browsersync.reload();
+    });
+  gulp.watch(paths.html.src)
     .on('change', browsersync.reload);
-  gulp.watch(
-    paths.sass.src,
-    buildStyles,
-  );
-  gulp.watch(
-    paths.html.src,
-    checkupW3C,
-  );
-}
-
-function watchFile() {
-  gulp.watch(
-    paths.sass.src,
-    buildStyles,
-  );
-  gulp.watch(
-    paths.css.src,
-    css,
-  );
-  gulp.watch(
-    paths.html.src,
-    html,
-  );
-  gulp.watch(
-    paths.js.src,
-    js,
-  );
+  gulp.watch(paths.js.src)
+    .on('change', browsersync.reload);
 }
 
 function clear(done) {
@@ -149,17 +123,9 @@ function clear(done) {
   done();
 }
 
+const launch = gulp.parallel(watch, browserSyncDev);
+const dev = gulp.series(scss, launch);
+const build = gulp.series(clear, html, css, js, images, browserSyncBuild);
 // exports
-const dev = gulp.parallel(watch, browserSyncDev);
-const devDist = gulp.parallel(watchFile, browserSyncBuild);
-exports.buildStyles = buildStyles;
-exports.clear = clear;
-exports.watch = watch;
 exports.default = dev;
-exports.devDist = devDist;
-exports.browserSyncDev = browserSyncDev;
-exports.html = html;
-exports.css = css;
-exports.checkupW3C = checkupW3C;
-const build = gulp.series(clear, html, css, js, images);
 exports.build = build;

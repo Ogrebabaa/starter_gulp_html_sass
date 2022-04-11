@@ -1,5 +1,5 @@
 function main() {
-  console.log('loaded');
+  console.log('js loaded');
 }
 
-document.addEventListener('DOMContentLoaded', main());
+document.addEventListener('DOMContentLoaded', main);

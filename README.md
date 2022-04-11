@@ -2,28 +2,9 @@
 
 ## Installation
 
-Clone the repo, init a node.js server and configure esLint :
+Clone the repo and install the packages :
 ```bash
-npm init -y
-npm install eslint
-npm install dart-sass
-./node_modules/.bin/eslint --init
-```
-
-## Packages required
-
-```bash
-npm install gulp
-npm install gulp-plumber
-npm install gulp-htmlmin
-npm install del
-npm install gulp-autoprefixer
-npm install gulp-clean-css
-npm install gulp-imagemin
-npm install gulp-jsmin
-npm install gulp-strip-comments
-npm install gulp-sass
-npm install gulp-w3cjs
+npm install
 ```
 
 ## Usage
